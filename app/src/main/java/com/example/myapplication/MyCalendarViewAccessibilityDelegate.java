@@ -64,7 +64,10 @@ final class MyCalendarViewAccessibilityDelegate extends View.AccessibilityDelega
           AccessibilityNodeInfo result = AccessibilityNodeInfo.obtain(view, virtualViewId);
           result.setViewIdResourceName("");
           result.setPackageName(view.getContext().getPackageName());
-          result.setClassName("android.widget.AbsSeekBar");
+          // AbsSeekBar works, but it will pronounce "one percent, progress bar", which is not what I want.
+//          result.setClassName("android.widget.AbsSeekBar");
+          // This stop working after android 11. It used to be able to pronounce "one percent, slider"
+          result.setClassName("android.widget.SeekBar");
           result.setSource(view, virtualViewId);
           result.setFocusable(true);
           result.setEnabled(true);
